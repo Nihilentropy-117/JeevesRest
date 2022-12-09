@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import os
 import mailActions
+import messageParsing
 
 app = Flask(__name__)
 
@@ -14,6 +15,9 @@ credentials = {
 
 @app.route('/run')
 def run():
-    command = request.args.get('command', default="*", type=str)
-    mailActions.sendMail(credentials, "gray.lott@gmail.com", "test", command)
+    input = request.args.get('command', default="*", type=str)
+    command = input.replace("%20", " ")
+    parsed = messageParsing.parse(command)
+    mailActions.sendMail(credentials, "gray.lott@gmail.com", parsed.subject, parsed.body)
     print("Mail Found, Processing")
+    return "Message Sent"
