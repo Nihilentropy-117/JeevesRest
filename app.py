@@ -20,4 +20,4 @@ def run():
     parsed = messageParsing.parse(command)
     mailActions.sendMail(credentials, "gray.lott@gmail.com", parsed.subject, parsed.body)
     print("Mail Found, Processing")
-    return f"Message Sent{parsed.subject}\n{parsed.body}"
+    return f"Message Sent---- {input} ---- {parsed.subject} ---- {parsed.body}"
