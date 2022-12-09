@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+    jeeves:
+          image: python:3.8.16-bullseye
+          restart: always
+          container_name: jeeves-body
+          ports:
+            - '5000:5000'
+          command:
+            - bash
+            - -c
+            - apt-get update
+            - apt-get install git -y
+            - git clone https://github.com/Nihilentropy-117/JeevesRest.git
+            - python3 app.py
