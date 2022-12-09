@@ -1,16 +1,15 @@
 from flask import Flask, jsonify, request
+import os
 
 app = Flask(__name__)
 
-incomes = "potato"
+username = os.environ['MY_USER']
+password = os.environ['MY_PASS']
 
 
 @app.route('/incomes')
 def get_incomes():
+    incomes = ("Running with user: %s" % username)
     return incomes
 
 
-@app.route('/incomes', methods=['POST'])
-def add_income():
-    incomes.append(request.get_json())
-    return '', 204
